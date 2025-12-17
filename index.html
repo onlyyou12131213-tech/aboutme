@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVP LIFE PLAN 2026 - Execution Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'SF Mono', monospace;
+        }
+        
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #111111;
+            --accent-blue: #0066cc;
+            --accent-green: #00cc66;
+            --accent-red: #cc3300;
+            --text-primary: #f0f0f0;
+            --text-secondary: #aaaaaa;
+            --border-color: #333333;
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        
+        .identity {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .identity-icon {
+            background-color: var(--accent-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .identity-text h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .identity-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .date-display {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .year-progress {
+            width: 200px;
+            height: 8px;
+            background-color: var(--secondary-dark);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .year-progress-bar {
+            height: 100%;
+            background-color: var(--accent-green);
+            width: 10%;
+            border-radius: 4px;
+        }
+        
+        /* Core Goals Grid */
+        .core-goals {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--accent-blue);
+        }
+        
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .goal-card {
+            background-color: var(--secondary-dark);
+            border-left: 4px solid var(--accent-blue);
+            padding: 20px;
+            border-radius: 4px;
+        }
+        
+        .goal-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .goal-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .goal-progress {
+            width: 100%;
+            height: 6px;
+            background-color: var(--primary-dark);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .goal-progress-bar {
+            height: 100%;
+            background-color: var(--accent-green);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* System Sections */
+        .system-section {
+            margin-bottom: 40px;
+        }
+        
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .system-card {
+            background-color: var(--secondary-dark);
+            padding: 25px;
+            border-radius: 4px;
+            border-top: 4px solid;
+        }
+        
+        .system-card.grade-a {
+            border-top-color: var(--accent-green);
+        }
+        
+        .system-card.cyber {
+            border-top-color: #cc3300;
+        }
+        
+        .system-card.brand {
+            border-top-color: #ff9900;
+        }
+        
+        .system-card.money {
+            border-top-color: #00cc66;
+        }
+        
+        .system-card.discipline {
+            border-top-color: #9966cc;
+        }
+        
+        .system-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rules-list {
+            list-style-type: none;
+        }
+        
+        .rules-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rules-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .rules-list li i {
+            color: var(--accent-blue);
+            font-size: 0.8rem;
+        }
+        
+        .phase-container {
+            margin-top: 20px;
+        }
+        
+        .phase {
+            padding: 15px;
+            background-color: var(--primary-dark);
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .phase h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+        }
+        
+        /* Daily Routine */
+        .daily-routine {
+            margin-bottom: 40px;
+        }
+        
+        .routine-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .routine-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--accent-blue);
+        }
+        
+        .routine-item {
+            position: relative;
+            padding-bottom: 25px;
+        }
+        
+        .routine-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+        }
+        
+        .routine-time {
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+        }
+        
+        .routine-activity {
+            color: var(--text-primary);
+        }
+        
+        /* End of Year Checklist */
+        .checklist {
+            margin-bottom: 40px;
+        }
+        
+        .checklist-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: var(--secondary-dark);
+            border-radius: 4px;
+        }
+        
+        .checkmark {
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--text-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .checkmark.checked {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+        
+        .checkmark.checked i {
+            color: var(--primary-dark);
+        }
+        
+        /* Quote */
+        .quote {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .date-display {
+                text-align: left;
+            }
+            
+            .identity-text h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Toggle Animation */
+        .toggle {
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .toggle:hover {
+            opacity: 1;
+        }
+        
+        /* Focus mode styling */
+        .focus-mode {
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 15px rgba(0, 102, 204, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="identity">
+                <div class="identity-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="identity-text">
+                    <h1>2026 MVP IDENTITY</h1>
+                    <p>Student first. Cybersecurity engineer in training. Founder of DigitalVPNNetworkBrand. Alone by choice. Focused by discipline.</p>
+                </div>
+            </div>
+            <div class="date-display">
+                <div id="current-date">Loading...</div>
+                <div class="year-progress">
+                    <div class="year-progress-bar" id="year-progress-bar"></div>
+                </div>
+                <div>2026 Progress: <span id="year-percentage">0%</span></div>
+            </div>
+        </header>
+        
+        <!-- Core Goals Section -->
+        <section class="core-goals">
+            <h2 class="section-title"><i class="fas fa-bullseye"></i> CORE GOALS (2026)</h2>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Grade A Academic Results</h3>
+                    <p>Academic excellence as foundation for all other goals.</p>
+                    <div class="goal-progress">
+                        <div class="goal-progress-bar" id="goal-1-progress"></div>
+                    </div>
+                </div>
+                <div class="goal-card">
+                    <h3><i class="fas fa-shield-alt"></i> Cybersecurity Engineer Foundation</h3>
+                    <p>Build practical skills for cybersecurity career path.</p>
+                    <div class="goal-progress">
+                        <div class="goal-progress-bar" id="goal-2-progress"></div>
+                    </div>
+                </div>
+                <div class="goal-card">
+                    <h3><i class="fas fa-globe"></i> Build DigitalVPNNetworkBrand</h3>
+                    <p>Real, functional brand with legitimate services.</p>
+                    <div class="goal-progress">
+                        <div class="goal-progress-bar" id="goal-3-progress"></div>
+                    </div>
+                </div>
+                <div class="goal-card">
+                    <h3><i class="fas fa-money-bill-wave"></i> First Legitimate Online Income</h3>
+                    <p>Proof of concept through actual revenue generation.</p>
+                    <div class="goal-progress">
+                        <div class="goal-progress-bar" id="goal-4-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- System Sections -->
+        <section class="system-section">
+            <h2 class="section-title"><i class="fas fa-cogs"></i> EXECUTION SYSTEMS</h2>
+            <div class="system-grid">
+                <!-- Grade A System -->
+                <div class="system-card grade-a">
+                    <h3><i class="fas fa-book"></i> GRADE A SYSTEM</h3>
+                    <ul class="rules-list">
+                        <li><i class="fas fa-check"></i> Study what is exam-related only</li>
+                        <li><i class="fas fa-check"></i> Past papers > textbooks</li>
+                        <li><i class="fas fa-check"></i> Active recall > rereading</li>
+                        <li><i class="fas fa-check"></i> 2–4 deep-focus hours/day</li>
+                        <li><i class="fas fa-times"></i> Remove what doesn't increase grades</li>
+                    </ul>
+                </div>
+                
+                <!-- Cybersecurity Path -->
+                <div class="system-card cyber">
+                    <h3><i class="fas fa-user-shield"></i> CYBERSECURITY ENGINEER PATH</h3>
+                    <div class="phase-container">
+                        <div class="phase">
+                            <h4>Phase 1: Foundations (Q1-Q2)</h4>
+                            <p>Linux, Networking, Python, Security Fundamentals</p>
+                        </div>
+                        <div class="phase">
+                            <h4>Phase 2: Hands-On Security (Q2-Q3)</h4>
+                            <p>Web security, Labs (legal only), CTF challenges</p>
+                        </div>
+                        <div class="phase">
+                            <h4>Phase 3: Specialization (Q4)</h4>
+                            <p>Network security / VPN, Blue team, Web security</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DigitalVPNNetworkBrand -->
+                <div class="system-card brand">
+                    <h3><i class="fas fa-network-wired"></i> DIGITALVPNNETWORKBRAND MVP</h3>
+                    <ul class="rules-list">
+                        <li><i class="fas fa-check"></i> One service, one message, one platform</li>
+                        <li><i class="fas fa-check"></i> Secure VPN info & setup</li>
+                        <li><i class="fas fa-check"></i> Digital privacy education</li>
+                        <li><i class="fas fa-check"></i> Network security consulting</li>
+                        <li><i class="fas fa-times"></i> No overpromising</li>
+                    </ul>
+                </div>
+                
+                <!-- Money MVP -->
+                <div class="system-card money">
+                    <h3><i class="fas fa-money-bill"></i> MONEY MVP (Q3-Q4)</h3>
+                    <ul class="rules-list">
+                        <li><i class="fas fa-target"></i> Targets: $1 → $100 → $1,000</li>
+                        <li><i class="fas fa-check"></i> Setup services</li>
+                        <li><i class="fas fa-check"></i> Consulting basics</li>
+                        <li><i class="fas fa-check"></i> Digital products (guides, configs)</li>
+                        <li><i class="fas fa-lightbulb"></i> Income proves legitimacy</li>
+                    </ul>
+                </div>
+                
+                <!-- Discipline Mode -->
+                <div class="system-card discipline">
+                    <h3><i class="fas fa-ban"></i> NO LOVE – DISCIPLINE MODE</h3>
+                    <ul class="rules-list">
+                        <li><i class="fas fa-times"></i> No relationships</li>
+                        <li><i class="fas fa-times"></i> No emotional dependency</li>
+                        <li><i class="fas fa-times"></i> Minimal social media</li>
+                        <li><i class="fas fa-volume-mute"></i> Silence = strength</li>
+                        <li><i class="fas fa-rocket"></i> Alone = faster growth</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Daily Routine -->
+        <section class="daily-routine">
+            <h2 class="section-title"><i class="fas fa-calendar-day"></i> DAILY MVP ROUTINE</h2>
+            <div class="routine-timeline">
+                <div class="routine-item">
+                    <div class="routine-time">06:00 - 10:00</div>
+                    <div class="routine-activity">Morning: Grade A study (deep focus)</div>
+                </div>
+                <div class="routine-item">
+                    <div class="routine-time">10:00 - 14:00</div>
+                    <div class="routine-activity">Afternoon: Cybersecurity learning (labs, practice)</div>
+                </div>
+                <div class="routine-item">
+                    <div class="routine-time">14:00 - 18:00</div>
+                    <div class="routine-activity">Evening: DigitalVPNNetworkBrand work (development, content)</div>
+                </div>
+                <div class="routine-item">
+                    <div class="routine-time">20:00 - 21:00</div>
+                    <div class="routine-activity">Night: Review & plan next day</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- End of Year Checklist -->
+        <section class="checklist">
+            <h2 class="section-title"><i class="fas fa-tasks"></i> END OF 2026 CHECKLIST</h2>
+            <div class="checklist-items">
+                <div class="checklist-item">
+                    <div class="checkmark" data-check="1">
+                        <i class="fas fa-check" style="display: none;"></i>
+                    </div>
+                    <div>Grade A results</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkmark" data-check="2">
+                        <i class="fas fa-check" style="display: none;"></i>
+                    </div>
+                    <div>Cybersecurity foundation</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkmark" data-check="3">
+                        <i class="fas fa-check" style="display: none;"></i>
+                    </div>
+                    <div>Working brand</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkmark" data-check="4">
+                        <i class="fas fa-check" style="display: none;"></i>
+                    </div>
+                    <div>Real skills</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkmark" data-check="5">
+                        <i class="fas fa-check" style="display: none;"></i>
+                    </div>
+                    <div>Focused mind</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quote -->
+        <div class="quote">
+            <p>"You're not isolating yourself — you're building yourself."</p>
+        </div>
+    </div>
+
+    <script>
+        // Update current date and year progress
+        function updateDateAndProgress() {
+            const now = new Date();
+            const yearStart = new Date(now.getFullYear(), 0, 1);
+            const yearEnd = new Date(now.getFullYear() + 1, 0, 1);
+            const yearProgress = (now - yearStart) / (yearEnd - yearStart);
+            
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', dateOptions);
+            
+            const progressBar = document.getElementById('year-progress-bar');
+            const yearPercentage = document.getElementById('year-percentage');
+            const progressPercent = Math.floor(yearProgress * 100);
+            
+            progressBar.style.width = `${progressPercent}%`;
+            yearPercentage.textContent = `${progressPercent}%`;
+            
+            // Update goal progress bars based on year progress
+            updateGoalProgress(progressPercent);
+        }
+        
+        // Update goal progress bars
+        function updateGoalProgress(yearProgress) {
+            // Each goal has different progress rates
+            const goal1 = document.getElementById('goal-1-progress');
+            const goal2 = document.getElementById('goal-2-progress');
+            const goal3 = document.getElementById('goal-3-progress');
+            const goal4 = document.getElementById('goal-4-progress');
+            
+            // Grade A results - should be ahead of schedule
+            goal1.style.width = `${Math.min(100, yearProgress + 15)}%`;
+            
+            // Cybersecurity foundation - steady progress
+            goal2.style.width = `${Math.min(100, yearProgress)}%`;
+            
+            // Brand building - slower start, accelerates later
+            const brandProgress = yearProgress < 50 ? yearProgress * 0.7 : yearProgress;
+            goal3.style.width = `${Math.min(100, brandProgress)}%`;
+            
+            // Income - starts later in the year
+            const incomeProgress = yearProgress < 60 ? 0 : (yearProgress - 60) * 2.5;
+            goal4.style.width = `${Math.min(100, incomeProgress)}%`;
+        }
+        
+        // Checklist functionality
+        function setupChecklist() {
+            const checkmarks = document.querySelectorAll('.checkmark');
+            
+            checkmarks.forEach(checkmark => {
+                checkmark.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    
+                    if (this.classList.contains('checked')) {
+                        this.classList.remove('checked');
+                        icon.style.display = 'none';
+                    } else {
+                        this.classList.add('checked');
+                        icon.style.display = 'block';
+                        
+                        // Add a subtle focus effect to the corresponding section
+                        const checkNum = this.getAttribute('data-check');
+                        highlightSystem(checkNum);
+                    }
+                });
+            });
+        }
+        
+        // Highlight system section when checklist item is checked
+        function highlightSystem(checkNum) {
+            const systemCards = document.querySelectorAll('.system-card');
+            
+            // Remove focus mode from all cards first
+            systemCards.forEach(card => {
+                card.classList.remove('focus-mode');
+            });
+            
+            // Map checklist items to system cards
+            const cardMap = {
+                '1': 'grade-a',
+                '2': 'cyber',
+                '3': 'brand',
+                '4': 'cyber', // Real skills maps to cybersecurity
+                '5': 'discipline'
+            };
+            
+            const cardClass = cardMap[checkNum];
+            if (cardClass) {
+                const targetCard = document.querySelector(`.system-card.${cardClass}`);
+                if (targetCard) {
+                    targetCard.classList.add('focus-mode');
+                    
+                    // Remove focus mode after 3 seconds
+                    setTimeout(() => {
+                        targetCard.classList.remove('focus-mode');
+                    }, 3000);
+                }
+            }
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateAndProgress();
+            setupChecklist();
+            
+            // Update progress every hour
+            setInterval(updateDateAndProgress, 3600000);
+            
+            // Add some initial progress to checklist for demo purposes
+            setTimeout(() => {
+                const firstTwo = document.querySelectorAll('.checkmark[data-check="1"], .checkmark[data-check="5"]');
+                firstTwo.forEach(check => {
+                    check.classList.add('checked');
+                    check.querySelector('i').style.display = 'block';
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
